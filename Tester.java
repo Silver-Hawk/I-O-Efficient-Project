@@ -38,50 +38,101 @@ public class Tester {
 	}
 
 	public static void part1(Random rnd){
-		System.out.println("Part1 running:");
+		long [][] resultHolderQuick = new long[20][5];
+		long [][] resultHolderHeap = new long[20][5];
 		
-
+		System.out.println("Part1 running:");
 		System.out.println("QUICKSORT ON INTS:");
-		int lasti = 0;
 		int i = 1000;
+		int lasti = 0;
+		int index = 0;
 		while(lasti < 500000000) {
-			int[] a = RandomIntArray(i, rnd);
+			for(int j = 0; j < 5; j++){
+				int[] a = RandomIntArray(i, rnd);
+
+				long before = System.currentTimeMillis();
+				QuickOnInts.sort(a);
+				long after = System.currentTimeMillis();
+
+				System.out.printf("%f sec on size %d\n", (after-before)/1000.0f, i);
+				TestCorrectOutput(a);
+
+				resultHolderQuick[index][j] =  after-before; 
+			}
+
+			lasti = i;
+			i *= 1.7;
+			index ++;
+		}
+
+		System.out.println("HEAPSORT ON INTS:");
+		i = 1000;
+		lasti = 0;
+		index = 0;
+		while(lasti < 500000000) {
+			for(int j = 0; j < 5; j++){
+				int[] a = RandomIntArray(i, rnd);
+
+				long before = System.currentTimeMillis();
+				HeapOnInts.sort(a);
+				long after = System.currentTimeMillis();
+
+				System.out.printf("%f sec on size %d\n", (after-before)/1000.0f, i);
+				TestCorrectOutput(a);
+			
+				resultHolderHeap[index][j] =  after-before; 
+			}
+
+			lasti = i;
+			i *= 1.7;
+			index ++;
+		}
+
+		System.out.println("R - OUTPUT QUICK");
+		System.out.print("a = c(");
+		i = 1000;
+		lasti = 0;
+		index = 0;
+		/*while(lasti < 500000000) {
+
+			//HeapOnInts.sort(resultHolderQuick[index]);
+
+			System.out.print("%f,",(resultHolderQuick[1]+resultHolderQuick[2]+resultHolderQuick[3])/3);
+
+			lasti = i;
+			i *= 1.7;
+			index ++; 
+		}*/
+		System.out.print(")");
+	}
+
+    public static void main(String[] args) {
+        if(args.length < 2){
+        	System.out.println("Program should be called with java -Xmx4g FUNCTION PROBLEM_SIZE\nFx. java -Xmx4g quicksortints 1000");
+        	System.exit(0);
+        }
+        //create random generator
+        Random rnd = new Random();
+ 		rnd.setSeed(1337);
+
+ 		if (args[0].equals("quicksortints")){
+			int[] a = RandomIntArray((int) Integer.parseInt(args[1]), rnd);
 
 			long before = System.currentTimeMillis();
 			QuickOnInts.sort(a);
 			long after = System.currentTimeMillis();
 
-			System.out.printf("%f sec on size %d\n", (after-before)/1000.0f, i);
-			TestCorrectOutput(a);
-			lasti = i;
-			i *= 1.7;
-		}
-
-		System.out.println("HEAPSORT ON INTS:");
-		lasti = 0;
-		i = 1000;
-		while(lasti < 500000000) {
-			int[] a = RandomIntArray(i, rnd);
+			System.out.printf("%d",(after-before));
+ 		}
+ 		else if(args[0].equals("heapsortints")){
+ 			int[] a = RandomIntArray((int) Integer.parseInt(args[1]), rnd);
 
 			long before = System.currentTimeMillis();
 			HeapOnInts.sort(a);
 			long after = System.currentTimeMillis();
 
-			System.out.printf("%f sec on size %d\n", (after-before)/1000.0f, i);
-			TestCorrectOutput(a);
-			lasti = i;
-			i *= 1.7;
-		}
-	}
-
-    public static void main(String[] args) {
-        //create random generator
-        Random rnd = new Random();
- 		rnd.setSeed(1337);
-
-		//part1
- 		part1(rnd);
-
+			System.out.printf("%d",(after-before));
+ 		}
     }
 
 }
