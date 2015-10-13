@@ -23,6 +23,16 @@ public class Tester {
 		return a;
 	}
 
+	public static Integer[] RandomIntegerArray(int size, Random r){
+		Integer[] a = new Integer[size];
+
+		for (int i = 0; i < size; i++){
+			a[i] = new Integer(r.nextInt());
+		}
+
+		return a;
+	}
+
 	public static void smallTest(Random rnd){
 		int[] a = RandomIntArray(10, rnd);
         int[] b = RandomIntArray(10, rnd);
@@ -129,6 +139,24 @@ public class Tester {
 
 			long before = System.currentTimeMillis();
 			HeapOnInts.sort(a);
+			long after = System.currentTimeMillis();
+
+			System.out.printf("%d",(after-before));
+ 		}
+ 		else if (args[0].equals("quicksortintegers")){
+			Integer[] a = RandomIntegerArray((int) Integer.parseInt(args[1]), rnd);
+
+			long before = System.currentTimeMillis();
+			QuickOnIntegers.sort(a);
+			long after = System.currentTimeMillis();
+
+			System.out.printf("%d",(after-before));
+ 		}
+ 		else if (args[0].equals("heapsortintegers")){
+			Integer[] a = RandomIntegerArray((int) Integer.parseInt(args[1]), rnd);
+
+			long before = System.currentTimeMillis();
+			HeapOnIntegers.sort(a);
 			long after = System.currentTimeMillis();
 
 			System.out.printf("%d",(after-before));
