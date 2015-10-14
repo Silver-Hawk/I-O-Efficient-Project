@@ -44,18 +44,6 @@ public class Tester {
 		return a;
 	}
 
-	public static void part3specificCycle(int size, int steps) {
-		int[] a = SpecificCycle(size);
-		followCylcle(a, steps);
-	}
-
-	public static void part3sattoloCycle(int size, int steps){
-		int[] a = SpecificCycle(size);
-		for (int i = 0; i < a.length; i ++){
-			a[i]--;
-		}
-
-	}
 
 	public static void followCylcle(int[] a, int steps){
 		int index = 0;
@@ -141,6 +129,23 @@ public class Tester {
 			long after = System.currentTimeMillis();
 
 			System.out.printf("%d",(after-before));
+ 		}
+ 		else if (args[0].equals("part4")){
+ 			int[] a = RandomIntArray((int) Integer.parseInt(args[1]), rnd);
+ 			int m = Integer.parseInt(args[2]);
+ 			int d = (int)Math.pow(2,Integer.parseInt(args[3]));
+
+ 			int touchme = 0;
+
+ 			long before = System.currentTimeMillis();
+ 			for (int i = 0; i < d*(m/a.length); i++){
+ 				for (int j = 0; j < a.length; j+=d){
+ 					touchme += a[j];
+ 				}
+ 			}
+			long after = System.currentTimeMillis();
+
+			System.out.printf("%d",(after-before));	
  		}
     }
 
