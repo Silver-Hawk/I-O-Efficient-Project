@@ -1,10 +1,11 @@
 from subprocess import Popen, PIPE
 
+quicklist = [[0 for x in range(5)] for x in range(26)]
+heaplist = [[0 for x in range(5)] for x in range(26)]
+
 i = 1000
 lasti = 0
 index = 0
-quicklist = [[0 for x in range(5)] for x in range(26)]
-heaplist = [[0 for x in range(5)] for x in range(26)]
 while lasti < 500000000:
 	for j in range(5):
 		print("QUICK : I " + str(i) + " j " + str(j))
@@ -15,6 +16,9 @@ while lasti < 500000000:
 	i = int(i * 1.7)
 	index += 1
 
+i = 1000
+lasti = 0
+index = 0
 while lasti < 500000000:
 	for j in range(5):
 		print("HEAP : I " + str(i) + " j " + str(j))
