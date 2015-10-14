@@ -33,87 +33,38 @@ public class Tester {
 		return a;
 	}
 
-	public static void smallTest(Random rnd){
-		int[] a = RandomIntArray(10, rnd);
-        int[] b = RandomIntArray(10, rnd);
+	public static int[] SpecificCycle(int size){
+		int[] a = new int[size];
 
-        QuickOnInts.sort(a);
-        HeapOnInts.sort(b);
+		for (int i = 0; i < size-1; i ++){
+			a[i] = i+1;
+		}
+		a[size-1] = 0;
 
-        QuickOnInts.show(a);
-        QuickOnInts.show(b);
-
-        TestCorrectOutput(a);
-        TestCorrectOutput(b);
+		return a;
 	}
 
-	public static void part1(Random rnd){
-		long [][] resultHolderQuick = new long[20][5];
-		long [][] resultHolderHeap = new long[20][5];
-		
-		System.out.println("Part1 running:");
-		System.out.println("QUICKSORT ON INTS:");
-		int i = 1000;
-		int lasti = 0;
+	public static void part3specificCycle(int size, int steps) {
+		int[] a = SpecificCycle(size);
+		followCylcle(a, steps);
+	}
+
+	public static void part3sattoloCycle(int size, int steps){
+		int[] a = SpecificCycle(size);
+		for (int i = 0; i < a.length; i ++){
+			a[i]--;
+		}
+
+	}
+
+	public static void followCylcle(int[] a, int steps){
 		int index = 0;
-		while(lasti < 500000000) {
-			for(int j = 0; j < 5; j++){
-				int[] a = RandomIntArray(i, rnd);
-
-				long before = System.currentTimeMillis();
-				QuickOnInts.sort(a);
-				long after = System.currentTimeMillis();
-
-				System.out.printf("%f sec on size %d\n", (after-before)/1000.0f, i);
-				TestCorrectOutput(a);
-
-				resultHolderQuick[index][j] =  after-before; 
-			}
-
-			lasti = i;
-			i *= 1.7;
-			index ++;
+		while (true && steps != 0){
+			index = a[index];
+			if (index == 0)
+				break;
+			steps--;
 		}
-
-		System.out.println("HEAPSORT ON INTS:");
-		i = 1000;
-		lasti = 0;
-		index = 0;
-		while(lasti < 500000000) {
-			for(int j = 0; j < 5; j++){
-				int[] a = RandomIntArray(i, rnd);
-
-				long before = System.currentTimeMillis();
-				HeapOnInts.sort(a);
-				long after = System.currentTimeMillis();
-
-				System.out.printf("%f sec on size %d\n", (after-before)/1000.0f, i);
-				TestCorrectOutput(a);
-			
-				resultHolderHeap[index][j] =  after-before; 
-			}
-
-			lasti = i;
-			i *= 1.7;
-			index ++;
-		}
-
-		System.out.println("R - OUTPUT QUICK");
-		System.out.print("a = c(");
-		i = 1000;
-		lasti = 0;
-		index = 0;
-		/*while(lasti < 500000000) {
-
-			//HeapOnInts.sort(resultHolderQuick[index]);
-
-			System.out.print("%f,",(resultHolderQuick[1]+resultHolderQuick[2]+resultHolderQuick[3])/3);
-
-			lasti = i;
-			i *= 1.7;
-			index ++; 
-		}*/
-		System.out.print(")");
 	}
 
     public static void main(String[] args) {
@@ -157,6 +108,36 @@ public class Tester {
 
 			long before = System.currentTimeMillis();
 			HeapOnIntegers.sort(a);
+			long after = System.currentTimeMillis();
+
+			System.out.printf("%d",(after-before));
+ 		}
+ 		else if (args[0].equals("part3specific")){
+ 			int size = Integer.parseInt(args[1]);
+ 			int steps = Integer.parseInt(args[2]);
+ 			int[] a = SpecificCycle(size);
+
+ 			long before = System.currentTimeMillis();
+			followCylcle(a,steps);
+			long after = System.currentTimeMillis();
+
+			System.out.printf("%d",(after-before));
+ 		}
+ 		else if (args[0].equals("part3sattolo")){
+			int size = Integer.parseInt(args[1]);
+ 			int steps = Integer.parseInt(args[2]);
+ 			int[] a = SpecificCycle(size);
+			
+			//reset to a[0] = 0
+			for (int i = 0; i < a.length-1; i ++){
+				a[i]--;
+			}
+			a[a.length-1] = a.length-1;
+
+			Sattolo.cycle(a, rnd);
+
+ 			long before = System.currentTimeMillis();
+			followCylcle(a,steps);
 			long after = System.currentTimeMillis();
 
 			System.out.printf("%d",(after-before));
