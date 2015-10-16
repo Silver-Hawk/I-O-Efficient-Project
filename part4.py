@@ -8,11 +8,11 @@ m = int(pow(2,30))
 
 print("PART4")
 for i in range(0,28):
-	for j in range(5):
-		proc = Popen("java -Xmx4g Tester part4 " + str(n) + " " + str(m) + " " + str(i), shell=True, stdout=PIPE, stderr=PIPE)
-		proc.wait()
-		results[i][j] = float(proc.stdout.readline())
+	#for j in range(5):
+	proc = Popen("java -Xmx4g Tester part4 " + str(n) + " " + str(m) + " " + str(i), shell=True, stdout=PIPE, stderr=PIPE)
+	proc.wait()
+	results[i][0] = float(proc.stdout.readline())
 	#find mean
-	results[i].sort()
-	mean = (results[i][1]+results[i][2]+results[i][3])/3
-	print(str(i)+","+str(mean))
+	#results[i].sort()
+	#mean = (results[i][1]+results[i][2]+results[i][3])/3
+	print(str(i)+","+str(results[i][0]))
