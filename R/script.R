@@ -2,7 +2,7 @@ setwd("~/Dropbox/Datalogi/DM207/assignments/ass1/I-O-Efficient-Project/R/")
 library(ggplot2)
 library(dplyr)
 
-WRITE_TO_REPORT <- T
+WRITE_TO_REPORT <- F
 
 nlogn <- function(x){
    x*log(x)   
@@ -18,7 +18,7 @@ plot_part1 <- ggplot(data = part1,aes(x=n,y=nlogn_time,color = alg))+
    scale_y_log10()+
    ggtitle("PART 1")
 if(WRITE_TO_REPORT){
-   pdf(file = "../../report/images/part1.pdf",width = 12.44)
+   pdf(file = "../report/images/part1.pdf",width = 12.44)
    print(plot_part1)
    dev.off()
 }else{
@@ -35,7 +35,7 @@ plot_part2 <- ggplot(data = part2,aes(x=n,y=nlogn_time,color = alg))+
    scale_y_log10()+
    ggtitle("PART 2")
 if(WRITE_TO_REPORT){
-   pdf(file = "../../report/images/part2.pdf",width = 12.44)
+   pdf(file = "../report/images/part2.pdf",width = 12.44)
    print(plot_part2)
    dev.off()
 }else{
@@ -52,7 +52,7 @@ plot_part3 <- ggplot(data = part3,aes(x=m,y=mtime,color = alg))+
    ylab("time/m") +
    ggtitle("PART 3")
 if(WRITE_TO_REPORT){
-   pdf(file = "../../report/images/part3.pdf",width = 12.44)
+   pdf(file = "../report/images/part3.pdf",width = 12.44)
    print(plot_part3)
    dev.off()
 }else{
