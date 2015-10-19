@@ -65,11 +65,7 @@ and had the following specifications:
 \end{figure}
 \noindent Since these computers are available to other student at the same time as the 
 tests were running it might have effected the results.
-\\
-\\
-Where appropriate we have added dashed lines indicating the estimated cache and 
-RAM limits. These guides are only estimates and don't consider other running 
-processes. 
+
 \section*{Task 1}
 \begin{figure}[H]
     \centering
@@ -171,6 +167,7 @@ different sectors and would dramatically reduce the efficiency of Quicksort.
 %RAM Quicksort still has an advantage because it focuses on distinct partitions
 %of the date rather than the whole set. This leads to a more efficient use of the 
 %cache.
+\newline
 \subsection*{5.3}
 \begin{figure}[H]
     \centering
@@ -180,7 +177,6 @@ different sectors and would dramatically reduce the efficiency of Quicksort.
 \end{figure}
 Again we see a huge running time penalty from utilizing the disk. Note that 
 SATTOLO timed out when it hit the disk. 
-\newline
 \subsection*{5.4}
 \begin{figure}[H]
     \centering
