@@ -139,7 +139,8 @@ public class Tester {
 
  			long before = System.currentTimeMillis();
  			for (int i = 0; i < d*(m/a.length); i++){
- 				for (int j = 0; j < a.length; j+=d){
+ 				int increase = (int)Math.pow(2,i);
+ 				for (int j = 0; j < a.length; j+=increase){
  					touchme += a[j];
  				}
  			}
