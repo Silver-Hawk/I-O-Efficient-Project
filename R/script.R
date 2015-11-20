@@ -8,7 +8,6 @@ FONTSIZE <- 24
 nlogn <- function(x){
    x*log(x)   
 }
-
 size <- 4
 osize <- 16
 
