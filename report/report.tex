@@ -43,7 +43,7 @@
 % DOCUMENT START
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section*{Introduction}
-The goal of this project is to a feeling of the possible impact of differences 
+The goal of this project is to get a feeling of the possible impact of differences 
 in memory access patterns on the running time of programs. 
 
 Through this report have the running times been plotted along with an estimate
@@ -70,6 +70,7 @@ tests were running it might have effected the results.
 Where appropriate we have added dashed lines indicating the estimated cache and 
 RAM limits. These guides are only estimates and don't consider other running 
 processes. 
+\newpage
 \section*{Task 1}
 \begin{figure}[H]
     \centering
@@ -83,17 +84,20 @@ sorted with Heapsort and Quicksort. The plot shows the running time of each
 algorithm relative to the expected running time $O(n \log n)$. 
 
 Based on the memory access pattern of the algorithms we are surprised that 
-Heapsort seems to outperform Quicksort while handling arrays which fit in cache.
+Heapsort seems to outperform Quicksort while handling arrays which fit in cache. 
+This might be atributted to the lower number of operations which can dominate on 
+instances of small $n$.
 
 Once the array sizes exceeds the cache limit it clearly show that the spread out
 memory access of Heapsort is heavily penalized.
+\newpage
 \section*{Task 2}
 \begin{figure}[H]
     \centering
     \includegraphics[width=
-    \textwidth]{images/part2.pdf}
-    \caption{Quicksort vs. Heapsort on arrays of \texttt{Integer}. 
-    \\(\texttt{Integer}$= 16$ bytes)}
+    \textwidth]{images/part2_quick.pdf}
+    \caption{Quicksort \texttt{int} vs. Quicksort \texttt{Integer}. 
+    \\(\texttt{int}$= 4$ bytes),\texttt{Integer}$= 16$ bytes)}
     \label{fig:awesome_image}
 \end{figure}
 Because Java uses \textit{pass-by-reference} when dealing with objects will an 
@@ -103,6 +107,18 @@ In figure 2 this is especially visible when the data size reaches L3 cache. In
 RAM Quicksort still has an advantage because it focuses on distinct partitions
 of the date rather than the whole set. This leads to a more efficient use of the 
 cache.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=
+    \textwidth]{images/part2_heap.pdf}
+    \caption{Heapsort \texttt{int} vs. Heapsort \texttt{Integer}. 
+    \\(\texttt{int}$= 4$ bytes),\texttt{Integer}$= 16$ bytes)}
+    \label{fig:awesome_image}
+\end{figure}
+Heapsort has less of a time penalty since it already has a pseudo random memory 
+access patern. Therefor it has a similar running time untill it reaches the RAM
+where out algorithm time out. 
+\newpage
 \section*{Task 3}
 \begin{figure}[H]
     \centering
@@ -110,8 +126,12 @@ cache.
     \caption{$n$-cyclic list lookup}
     \label{fig:awesome_image}
 \end{figure}
+
 Here we clearly see that SATTOLO performs much worse than a standard $n$-cycle 
-because it need to load the same blocks in over and over again where SPECIFIC
+because it has potential for 1 cachmiss per memory access. SCAN only has one 
+cachmiss pr blocksize. 
+
+need to load the same blocks in over and over again where SCAN
 only needs to load a block once.
 \section*{Task 4}
 \begin{figure}[H]
@@ -120,13 +140,20 @@ only needs to load a block once.
     \caption{Random array access}
     \label{fig:awesome_image}
 \end{figure}
-At each $i$ the number of elements used in each block is halved. This leads to 
-doubling the number of block loads. We expected to see an exponential increase 
-in running time until reaching a maximum of one block load pr operation. 
+As $d$ increases is each block utilized less resulting in an increase in running 
+time. Around $d=5$ we leave L1 cache, around $d=13$ we leave L2. A very 
+noticable increase starting from $d=17$ indicat that we are querying the RAM 
+regularly. Around $d=24$ we see that the number of element touched by the 
+algorithm has decreased to a size that fits in the cache and at $d=27$ we have a 
+running time similar to the initial scan running time.  
 
-Because our cacheline is 64 b and one \texttt{int} is four bytes $d^i$ would 
-have to be equal or higher than 16000. 
-
+%At each $i$ the number of elements used in each block is halved. This leads to 
+%doubling the number of block loads. We expected to see an exponential increase 
+%in running time until reaching a maximum of one block load pr operation. 
+%
+%Because our cacheline is 64 b and one \texttt{int} is four bytes $d^i$ would 
+%have to be equal or higher than 16000. 
+%
 \section*{Task 5}
 \subsection*{5.1}
 \begin{figure}[H]
