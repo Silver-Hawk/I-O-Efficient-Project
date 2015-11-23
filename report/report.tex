@@ -79,13 +79,13 @@ processes.
     \caption{Quicksort vs. Heapsort on arrays of \texttt{int}. 
     \\(\texttt{int}$= 4$ bytes)}
 \end{figure}
-In figur 1 are arrays of sizes between 1000 and 577011370 containing integers 
+In figure 1 are arrays of sizes between 1000 and 577011370 containing integers 
 sorted with Heapsort and Quicksort. The plot shows the running time of each 
 algorithm relative to the expected running time $O(n \log n)$. 
 
 Based on the memory access pattern of the algorithms we are surprised that 
 Heapsort seems to outperform Quicksort while handling arrays which fit in cache. 
-This might be atributted to the lower number of operations which can dominate on 
+This might be attributed to the lower number of operations which can dominate on 
 instances of small $n$.
 
 Once the array sizes exceeds the cache limit it clearly show that the spread out
@@ -116,7 +116,7 @@ cache.
     \label{fig:awesome_image}
 \end{figure}
 Heapsort has less of a time penalty since it already has a pseudo random memory 
-access patern. Therefor it has a similar running time untill it reaches the RAM
+access pattern. Therefor it has a similar running time until it reaches the RAM
 where out algorithm time out. 
 \newpage
 \section*{Task 3}
@@ -128,8 +128,8 @@ where out algorithm time out.
 \end{figure}
 
 Here we clearly see that SATTOLO performs much worse than a standard $n$-cycle 
-because it has potential for 1 cachmiss per memory access. SCAN only has one 
-cachmiss pr blocksize. 
+because it has potential for 1 cache miss per memory access. SCAN only has one 
+cache miss per blocksize. 
 
 need to load the same blocks in over and over again where SCAN
 only needs to load a block once.
@@ -142,7 +142,7 @@ only needs to load a block once.
 \end{figure}
 As $d$ increases is each block utilized less resulting in an increase in running 
 time. Around $d=5$ we leave L1 cache, around $d=13$ we leave L2. A very 
-noticable increase starting from $d=17$ indicat that we are querying the RAM 
+noticeable increase starting from $d=17$ indicate that we are querying the RAM 
 regularly. Around $d=24$ we see that the number of element touched by the 
 algorithm has decreased to a size that fits in the cache and at $d=27$ we have a 
 running time similar to the initial scan running time.  
