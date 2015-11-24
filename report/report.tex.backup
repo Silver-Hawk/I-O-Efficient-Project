@@ -14,7 +14,7 @@
 \usepackage{subcaption}
 \usetikzlibrary{arrows,decorations.pathmorphing,backgrounds,positioning,fit,matrix}
 \newcommand{\DepProps}{\textsc{DepProps}}
-\usepackage{titling}
+%\usepackage{titling}
 \newcommand{\subtitle}[1]{%
   \posttitle{%
     \par\end{center}
@@ -23,8 +23,7 @@
 }
 \begin{document}
 % TITLE
-\title{DM207 I/O-Efficient Algorithms and Data Structures}
-\subtitle{Fall 2015\\Project 1}
+\title{DM207 I/O-Efficient Algorithms and Data Structures}\subtitle{Fall 2015\\Project 1}
 % AUTHER
 \author{Mikkel Levisen and Jesper Lund}
 %DATE
@@ -140,13 +139,20 @@ only needs to load a block once.
     \caption{Random array access}
     \label{fig:awesome_image}
 \end{figure}
-At each $i$ the number of elements used in each block is halved. This leads to 
-doubling the number of block loads. We expected to see an exponential increase 
-in running time until reaching a maximum of one block load pr operation. 
+As $d$ increases is each block utilized less resulting in an increase in running 
+time. Around $d=5$ we leave L1 cache, around $d=13$ we leave L2. A very 
+noticable increase starting from $d=17$ indicat that we are querying the RAM 
+regularly. Around $d=24$ we see that the number of element touched by the 
+algorithm has decreased to a size that fits in the cache and at $d=27$ we have a 
+running time similar to the initial scan running time.  
 
-Because our cacheline is 64 b and one \texttt{int} is four bytes $d^i$ would 
-have to be equal or higher than 16000. 
-
+%At each $i$ the number of elements used in each block is halved. This leads to 
+%doubling the number of block loads. We expected to see an exponential increase 
+%in running time until reaching a maximum of one block load pr operation. 
+%
+%Because our cacheline is 64 b and one \texttt{int} is four bytes $d^i$ would 
+%have to be equal or higher than 16000. 
+%
 \section*{Task 5}
 \subsection*{5.1}
 \begin{figure}[H]

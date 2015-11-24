@@ -167,8 +167,8 @@ Here we can clearly see the difference in memory access time when data size
 exceeds cache and RAM. Both Heapsort and Quicksort suffers in speed due to the 
 extremely slow load time of the disk. 
 
-Quicksort still outperforms Heapsort since because it deals with data in 
-sequential chunks.    
+But Heapsort truly suffers the most, when we reach ram due to Heapsorts natural random memory access behavior.
+Quicksort do finish on disk, but still with a great penalty. Heapsort doesn't finish within our time limit, when it reaches sizes that has to be on disk. 
 %In figur 1 are arrays of sizes between 1000 and 577011370 containing integers 
 %sorted with Heapsort and Quicksort. The plot shows the running time of each 
 %algorithm relative to the expected running time $O(n \log n)$. 
@@ -207,6 +207,7 @@ different sectors and would dramatically reduce the efficiency of Quicksort.
 \end{figure}
 Again we see a huge running time penalty from utilizing the disk. Note that 
 SATTOLO timed out when it hit the disk. 
+Which means, even though SATTOLO was slower before, it is much slower once it reaches the disk.
 \newline
 \subsection*{5.4}
 \begin{figure}[H]
@@ -215,12 +216,12 @@ SATTOLO timed out when it hit the disk.
     \caption{Random array access}
     \label{fig:awesome_image}
 \end{figure}
-Since the array is larger than the RAM + cache is the 
-operation very expensive right from the start, timeing out at $i = 3$. 
-%At each $i$ the number of elements used in each block is halved. This leads to 
-%doubling the number of block loads. We expected to see an exponential increase 
-%in running time until reaching a maximum of one block load pr operation. 
-%
-%Because our cacheline is 64 kB and one \texttt{int} is four bytes $d^i$ would 
-%have to be equal or higher than 16000. 
+Like with more RAM, as $d$ increases so does the running time, but since we already operate within the boundaries of the RAM,
+the ram, and we dont have to make 5.4 again...
+%As $d$ increases is each block utilized less resulting in an increase in running 
+%time. Around $d=5$ we leave L1 cache, around $d=13$ we leave L2. A very 
+%noticeable increase starting from $d=17$ indicate that we are querying the RAM 
+%regularly. Around $d=24$ we see that the number of element touched by the 
+%algorithm has decreased to a size that fits in the cache and at $d=27$ we have a 
+%running time similar to the initial scan running time.  
 \end{document}
