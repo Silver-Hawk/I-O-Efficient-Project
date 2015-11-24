@@ -237,7 +237,7 @@ if(WRITE_TO_REPORT){
 part4 <- read.table("alg_output/part5/part5_4",sep = ",",header = T)
 m <- 2^30
 part4$time_m <- part4$time/m
-plot_part4 <- ggplot(data = part4,aes(x=i,y=time_m))+
+plot_part4 <- ggplot(data = part4,aes(x=d,y=time))+
    geom_line(alpha = 0.5)+
    geom_point()+
    theme(text = element_text(size=FONTSIZE),
